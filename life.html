@@ -31,12 +31,6 @@ Your browser does not support the canvas element.
 				//function neighborCount(i,j) ->
 				//next[i][j] = F(current[i][j])
 				//current <- next
-				currentField[0][0] = 1;
-				currentField[1][1] = 1;
-				currentField[2][1] = 1;
-				currentField[0][2] = 1;
-				currentField[1][2] = 1;
-				
 				let sum = neighborCount(i, j);
 				if (currentField[i][j] == 1){
 					if (sum == 2 || sum == 3)
@@ -89,17 +83,22 @@ Your browser does not support the canvas element.
 	let canvas = document.getElementById("myCanvas");
 	let ctx = canvas.getContext("2d");
 	
-	for (let i = 0; i < fieldSize; i++){
+	/*for (let i = 0; i < fieldSize; i++){
 		for (let j = 0; j < fieldSize; j++){
 			//currentField[i][j] = 1 * (Math.random() > 0.5);
-			currentField[0][0] = 1;
-			currentField[1][1] = 1;
-			currentField[2][1] = 1;
-			currentField[0][2] = 1;
-			currentField[1][2] = 1;
 			nextField[i][j] = 0;
 		}
 	}
+	*/
+	for (let i = 0; i < fieldSize; i++){
+		for (let j = 0; j < fieldSize; j++){
+			nextField[i][j]=0;
+			if ((i == 0 && j == 0)||(i == 1 && j == 1)||(i == 2 && j == 1)||(i == 0 && j == 2)||(i == 1 && j == 2)) 
+				currentField[i][j] = 1;
+			else
+				currentField[i][j] = 0;
+		}
+	}	
 	draw();
 
 	let tm = setInterval(nextGeneration, 500);
